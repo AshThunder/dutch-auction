@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAccount, useReadContract, useWriteContract, usePublicClient } from 'wagmi'
 import { formatUnits, erc20Abi, parseUnits } from 'viem'
 import { useConfidentialBalance, useUnwrap } from '@zama-fhe/react-sdk'
@@ -94,11 +94,12 @@ export function Dashboard() {
     functionName: 'decimals',
   })
 
-  const { data: tokenSymbol } = useReadContract({
-    address: ZAMA_USDC_ADDRESS,
-    abi: erc20Abi,
-    functionName: 'symbol',
-  })
+  // Token symbol hook — available if needed:
+  // const { data: tokenSymbol } = useReadContract({
+  //   address: ZAMA_USDC_ADDRESS,
+  //   abi: erc20Abi,
+  //   functionName: 'symbol',
+  // })
 
   // 5. Get Confidential Balance using Zama React SDK
   const { data: confidentialBalanceRaw, refetch: refetchConfidentialBalance } = useConfidentialBalance({
@@ -117,7 +118,7 @@ export function Dashboard() {
   })
 
   const decimals = tokenDecimals !== undefined ? tokenDecimals : 6
-  const symbol = tokenSymbol || 'USDC'
+  // symbol available as (tokenSymbol || 'USDC') if needed
 
   const publicBalance = publicBalanceRaw !== undefined ? formatUnits(publicBalanceRaw as bigint, decimals) : '0'
   const confidentialBalance = confidentialBalanceRaw !== undefined ? formatUnits(confidentialBalanceRaw, decimals) : '0'
@@ -204,6 +205,7 @@ export function Dashboard() {
       onMutate: () => {
         setUnwrapStatus('Unwrapping confidential tokens…')
         toast.loading('Unwrapping cUSDC → USDC…', { id: 'unwrap' })
+        return undefined as any
       },
       onSuccess: () => {
         setUnwrapStatus(null)

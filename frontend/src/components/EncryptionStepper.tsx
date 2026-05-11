@@ -56,7 +56,7 @@ export function EncryptionStepper({ steps, errorMessage }: {
         {/* Vertical connector line background */}
         <div className="absolute left-[15px] top-[20px] bottom-[20px] w-[2px] bg-[#1c1c1e]/10 z-0" />
         
-        {steps.map((step, i) => {
+        {steps.map((step) => {
           const Icon = ICON_MAP[step.icon]
           const isCompleted = step.status === 'completed'
           const isActive = step.status === 'active'

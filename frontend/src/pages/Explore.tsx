@@ -58,7 +58,7 @@ export function Explore() {
   })
 
   const auctionAddresses = useMemo(() => {
-    return auctionsData?.map(d => d.result as `0x${string}`).filter(Boolean) || []
+    return auctionsData?.map(d => d.result as unknown as `0x${string}`).filter(Boolean) || []
   }, [auctionsData])
 
   const { data: auctionDetails } = useReadContracts({

@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useAccount, useWriteContract, useReadContracts, useReadContract, usePublicClient } from 'wagmi'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEncrypt, usePublicDecrypt, useConfidentialBalance, useUserDecrypt } from '@zama-fhe/react-sdk'
 import { bytesToHex, parseUnits, formatUnits, erc20Abi } from 'viem'
 import { DutchAuctionABI, erc7984Abi } from '../abi/contracts'
 import { toast } from 'sonner'
 import confetti from 'canvas-confetti'
 import {
-  Lock, Unlock, Shield, ShieldCheck, ShieldAlert,
-  Loader2, CheckCircle2, XCircle, Send, Search,
-  Crown, Clock, Radio, ArrowLeft, AlertCircle, Info, ArrowRight, Timer
+  Lock, Unlock,
+  Loader2, CheckCircle2, XCircle,
+  Info, ArrowRight, Timer
 } from 'lucide-react'
 import { EncryptionStepper, type EncryptionStep } from '../components/EncryptionStepper'
 import { EncryptedOrderBook } from '../components/EncryptedOrderBook'
@@ -98,7 +98,7 @@ export function AuctionDetail() {
   const [bidPrice, setBidPrice]       = useState('')
   const [bidQuantity, setBidQuantity] = useState('')
   const [bidStatus, setBidStatus]     = useState<string | null>(null)
-  const [bidProgress, setBidProgress] = useState(0)
+  const [, setBidProgress] = useState(0)
   const [isBidding, setIsBidding]     = useState(false)
   const [bidSteps, setBidSteps]       = useState<EncryptionStep[]>([])
   const [bidError, setBidError]       = useState<string | null>(null)
@@ -136,7 +136,7 @@ export function AuctionDetail() {
   })
 
   const tokenAddress    = auctionData?.[0]?.result as `0x${string}` | undefined
-  const totalSupplyWei  = (auctionData?.[1]?.result as bigint) || 0n
+  // totalSupplyWei available via auctionData?.[1]?.result if needed
   const totalSupplyUnits = Number(auctionData?.[2]?.result ?? 0n)
   const floorPriceRaw   = (auctionData?.[3]?.result as bigint) || 0n
   const endTime         = Number(auctionData?.[4]?.result ?? 0)
@@ -144,7 +144,7 @@ export function AuctionDetail() {
   const clearingPriceRaw = (auctionData?.[6]?.result as bigint) || 0n
   const pricePoints     = Number(auctionData?.[7]?.result ?? 0)
   const userBids        = Number(auctionData?.[8]?.result ?? 0)
-  const tokenDecimals   = Number(auctionData?.[9]?.result ?? 18)
+  // tokenDecimals available via auctionData?.[9]?.result if needed
   const auctionOwner    = auctionData?.[10]?.result as `0x${string}` | undefined
 
   const claimData = auctionData?.[14]?.result as [boolean, boolean, bigint, bigint, bigint] | undefined
@@ -227,7 +227,7 @@ export function AuctionDetail() {
   )
   // Extract the decrypted refund bigint (in paymentToken wei, 6 decimals for USDC)
   const decryptedRefundRaw: bigint | undefined = refundHandleIsValid && refundDecryptData
-    ? (refundDecryptData[claimEncRefundHandle as string] as bigint | undefined)
+    ? ((refundDecryptData as Record<string, unknown>)[claimEncRefundHandle as string] as bigint | undefined)
     : undefined
   const decryptedRefundFormatted = decryptedRefundRaw !== undefined
     ? formatUnits(decryptedRefundRaw, 6)

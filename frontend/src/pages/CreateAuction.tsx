@@ -20,7 +20,7 @@ export function CreateAuction() {
   // Form state
   const [tokenToSell, setTokenToSell] = useState('')
   const [tokenTicker, setTokenTicker] = useState('')
-  const [paymentToken, setPaymentToken] = useState(ZAMA_USDC)
+  const [paymentToken, _setPaymentToken] = useState(ZAMA_USDC)
   
   // Date/Time and Duration Logic
   const formatDate = (d: Date) => {
