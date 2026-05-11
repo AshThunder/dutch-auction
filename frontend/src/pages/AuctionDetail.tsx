@@ -540,7 +540,7 @@ export function AuctionDetail() {
       {/* Token name pill */}
       <div className="flex items-center gap-2">
         <span className="material-symbols-outlined text-primary text-[20px]">token</span>
-        <span className="font-label-mono text-[13px] font-bold text-on-surface">${tokenName} Token Auction</span>
+        <span className="font-label-mono text-base font-bold text-on-surface">${tokenName} Token Auction</span>
       </div>
       <div className="h-5 w-px bg-outline-variant hidden md:block" />
       {/* Share row */}

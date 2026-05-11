@@ -122,7 +122,7 @@ export function PricingChart({ auctionAddress, floorPriceFormatted, clearingPric
                 x={clearing} 
                 stroke="#1c1c1e" 
                 strokeWidth={2}
-                label={{ position: 'top', value: 'Clearing Price', fill: '#1c1c1e', fontSize: 12, fontWeight: 700, fontFamily: 'Space Mono' }} 
+                label={{ position: 'insideTopLeft', offset: 10, value: 'Clearing Price', fill: '#1c1c1e', fontSize: 12, fontWeight: 700, fontFamily: 'Space Mono' }} 
               />
             )}
 
