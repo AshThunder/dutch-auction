@@ -8,7 +8,7 @@ export function Footer() {
             <div className="font-display-xl text-headline-lg text-surface-bright font-bold tracking-tight">DUTCH AUCTION</div>
           </div>
           <p className="text-surface-variant opacity-80 mt-2 max-w-xs">
-            © 2024 Zama FHE Dutch Auction. All data is end-to-end encrypted.
+            © 2026 Zama FHE Dutch Auction. All data is end-to-end encrypted.
           </p>
         </div>
         <div className="col-span-1 flex flex-col gap-4">
