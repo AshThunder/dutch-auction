@@ -15,6 +15,7 @@ The frontend application provides a seamless, dynamic interface for users to cre
 - **Auction Creation Workflow:** Step-by-step form to set auction parameters, approve token spending, and deploy a new `DutchAuction` contract directly from the browser.
 - **Integrated Test Token Deployer:** A built-in utility allowing users to instantly deploy a `MockERC20` token to test the auction functionality without external faucet juggling.
 - **Encrypted Bidding Interface:** Securely generates `euint64` payloads using Zama's SDK, masking the user's desired quantity before the transaction ever leaves the browser.
+- **Educational Flow:** Comprehensive "How it Works" page and "The Clearing Price Logic" visualizations to guide users through the FHE auction lifecycle.
 
 ## Running Locally
 

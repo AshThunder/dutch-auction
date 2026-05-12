@@ -1,38 +1,57 @@
 # Zama Auction Contracts
 
-This directory contains the Fully Homomorphic Encryption (FHE) enabled smart contracts for the Confidential Dutch Auction.
+This directory contains the Fully Homomorphic Encryption (FHE) enabled smart contracts for the Confidential Dutch Auction. By leveraging Zama's **fhEVM**, we achieve complete privacy of bid quantities, eliminating front-running and MEV manipulation.
 
-## Architecture
+## 🏗️ Core Contracts
 
-The system is composed of two primary contracts:
+### 1. [`AuctionFactory.sol`](./AuctionFactory.sol)
+The permissionless entry point for creating new auctions.
+- **Permissionless:** Anyone can deploy an auction for any standard ERC-20 token.
+- **Escrow:** Securely locks the `tokenToSell` supply during the auction creation.
+- **Metadata Management:** Automatically derives token decimals and manages auction tracking for the frontend.
 
-1. **`AuctionFactory.sol`**
-   - Acts as a permissionless hub for users to create new confidential auctions.
-   - Handles parameter validation, securely transfers the underlying `tokenToSell` into the new auction contract, and tracks all deployed auctions.
+### 2. [`DutchAuction.sol`](./DutchAuction.sol)
+The engine that powers the confidential bidding and settlement process.
+- **Encrypted Bidding:** Bid quantities are submitted as `euint64` ciphertexts. 
+- **Privacy-Preserving Demand:** The contract aggregates demand at each price point without exposing the volume to public observers.
+- **Coprocessor Integration:** Uses Zama's KMS for secure decryption of the final clearing price once the auction ends.
 
-2. **`DutchAuction.sol`**
-   - The core auction engine implementing Zama's `@fhevm/solidity` library.
-   - **Bidding Phase:** Accepts public price tiers but strictly encrypts bid quantities as `euint64`. Under the hood, it aggregates demand at specific price points without revealing individual or total demand sizes to the network.
-   - **Finalization Phase:** Emits a secure decryption request to the Zama Coprocessor KMS to decrypt the exact clearing price.
-   - **Claim Phase:** Securely processes `FHE.select` (conditional multiplexing) logic to determine if a bidder won tokens, or if they receive a refund in the confidential ERC-7984 payment token.
+## 🔐 FHE Logic & Security
 
-## Fully Homomorphic Encryption (FHE) Implementation
+The project utilizes specific `FHE` primitives to ensure data integrity while maintaining confidentiality:
 
-This project heavily utilizes the `FHE` library to execute logic on encrypted data:
-- **`FHE.add`**: Aggregates encrypted demand at specific price points.
-- **`FHE.lte` / `FHE.gte`**: Compares aggregate demand against the total supply to determine the clearing price entirely in ciphertexts.
-- **`FHE.select`**: Allocates either the token payload or a full refund based on whether a user's bid price was above or below the clearing price.
+### Confidential State Machine
+- **Aggregation:** We use `FHE.add` to build a demand curve on-chain. Even the total number of bids or the total demand at a price is hidden in ciphertext.
+- **Sorting & Clearing:** The contract iterates through price points in descending order. Using `FHE.lte`, it determines if the cumulative demand has exhausted the fixed supply.
+- **Multiplexing (FHE.select):** Settlement uses `FHE.select` to determine winners. If `bid_price >= clearing_price`, the contract calculates an allocation; otherwise, it marks the bid for a full refund.
 
-## Deployment
+### MEV & Front-running Resistance
+Because the demand curve is encrypted, searchers cannot see where the "buy wall" is. They cannot calculate the potential clearing price in advance to front-run other bidders, ensuring a fair, equilibrium-based outcome for all participants.
 
-Deploying to the Zama fhEVM network requires specific configuration. 
+## 🛠️ Development & Testing
+
+### Compilation
+The contracts are configured for the **Paris** EVM version to maintain compatibility with current fhEVM precompiles.
 
 ```bash
-# Compile contracts (targets Paris EVM version to avoid PUSH0 issues on fhEVM)
 npx hardhat compile
-
-# Deploy to Zama testnet
-npx hardhat run scripts/deploy.ts --network sepolia
 ```
 
-Ensure your `.env` contains your deployer `PRIVATE_KEY` and the correct `SEPOLIA_RPC_URL`.
+### Testing
+The Hardhat test suite (`/test`) validates:
+- **Strict Bounds:** Auctions cannot be created in the past or end before they start.
+- **Access Control:** Only the owner/coprocessor can trigger finalization.
+- **Structural Integrity:** Ensures correct handling of ERC-20 and ERC-7984 (confidential) token transfers.
+
+*Note: For functional FHE testing, a Zama-enabled node or the `fhevmjs` mock environment is required.*
+
+## 🚀 Deployment
+
+```bash
+npx hardhat run scripts/deploy.ts --network zama
+```
+
+### Environment Variables
+Required in the root `.env`:
+- `PRIVATE_KEY`: Your deployment account.
+- `SEPOLIA_RPC_URL`: RPC endpoint for the Zama fhEVM network.

@@ -41,7 +41,7 @@ export function HowItWorks() {
           <div className="lg:col-span-5 relative">
             {/* Floating Sticky Note Mockup */}
             <div className="bg-[#ffeb3b] p-8 rounded-[28px] shadow-[0px_4px_10px_rgba(0,0,0,0.08)] transform rotate-2 relative z-10 max-w-sm ml-auto">
-              <div className="font-label-mono text-label-mono text-on-surface mb-4 border-b border-on-surface/20 pb-2">LIVE SIMULATION</div>
+              <div className="font-label-mono text-label-mono text-on-surface mb-4 border-b border-on-surface/20 pb-2">DUTCH AUCTION</div>
               <div className="space-y-4 font-encrypted-data text-encrypted-data">
                 <div className="flex justify-between items-center border-b border-on-surface/10 pb-2">
                   <span>BID_ID_0942</span>
@@ -55,6 +55,122 @@ export function HowItWorks() {
                   <span>PRICE_DISCOVERY</span>
                   <span className="text-on-surface font-bold animate-pulse">CALCULATING...</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Launch Process (For Creators) ────────────────────────── */}
+        <section className="space-y-16 pb-16 border-b border-surface-variant">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-headline-lg text-headline-lg text-on-surface">Launching an Auction</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant">The process for token creators to launch a new confidential sale is entirely permissionless and automated.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Launch Step 1 */}
+            <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">1</div>
+              <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Token Approval</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">Creators approve the factory contract to spend the amount of tokens they wish to auction. This uses standard ERC-20 patterns.</p>
+            </div>
+            {/* Launch Step 2 */}
+            <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">2</div>
+              <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Factory Deployment</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">Parameters like floor price, duration, and supply are submitted. The factory deploys a new unique Dutch Auction instance.</p>
+            </div>
+            {/* Launch Step 3 */}
+            <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">3</div>
+              <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Escrow Funding</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">The factory automatically moves the sale tokens into the auction contract's escrow, where they are locked until the auction ends.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Bidding Process (For Participants) ────────────────────── */}
+        <section className="space-y-16 pb-16 border-b border-surface-variant">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-headline-lg text-headline-lg text-on-surface">Participating in an Auction</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant">Bidding is secure and private. Your intent is never exposed to the mempool or other participants.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Bid Step 1 */}
+            <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">1</div>
+              <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Shield Assets</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">Bidders must first shield their stablecoins into a confidential token (USDC). This ensures the bidding funds are private. You can mint test USDC directly from your <Link to="/dashboard" className="text-primary hover:underline">Dashboard</Link>.</p>
+            </div>
+            {/* Bid Step 2 */}
+            <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">2</div>
+              <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Local Encryption</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">Using the Zama SDK, your bid quantity is encrypted locally on your device. The raw quantity never leaves your browser.</p>
+            </div>
+            {/* Bid Step 3 */}
+            <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">3</div>
+              <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Secure Submission</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">The encrypted bid is submitted to the contract. The network can verify you have the funds without knowing how much you're bidding.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Settlement & Clearing ────────────────────────────────── */}
+        <section className="space-y-16 pb-16 border-b border-surface-variant">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="font-headline-lg text-headline-lg text-on-surface">The Clearing Price Mechanism</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant">How a single, fair price is discovered for all participants without revealing individual bid data.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div className="flex gap-6">
+                <div className="w-12 h-12 bg-tertiary text-on-tertiary rounded-full flex items-center justify-center shrink-0 font-bold">1</div>
+                <div>
+                  <h4 className="font-headline-lg text-lg mb-2 text-on-surface">Demand Aggregation</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">The smart contract sums up the total encrypted demand at every price point. FHE allows the contract to compare quantities without knowing their values.</p>
+                </div>
+              </div>
+              <div className="flex gap-6">
+                <div className="w-12 h-12 bg-tertiary text-on-tertiary rounded-full flex items-center justify-center shrink-0 font-bold">2</div>
+                <div>
+                  <h4 className="font-headline-lg text-lg mb-2 text-on-surface">Price Discovery</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">The engine finds the highest price at which the total demand equals or exceeds the total supply. This is the "Clearing Price".</p>
+                </div>
+              </div>
+              <div className="flex gap-6">
+                <div className="w-12 h-12 bg-tertiary text-on-tertiary rounded-full flex items-center justify-center shrink-0 font-bold">3</div>
+                <div>
+                  <h4 className="font-headline-lg text-lg mb-2 text-on-surface">Fair Allocation</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Everyone who bid at or above the clearing price pays the same final price. Any excess payment is automatically refunded via confidential transaction.</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-surface-container p-8 rounded-[28px] border border-surface-variant shadow-sm relative overflow-hidden">
+              <div className="font-label-mono text-label-mono text-on-surface mb-6 flex justify-between items-center">
+                <span>SIMULATED WATERFALL</span>
+                <span className="text-primary font-bold">LIVE CALCULATION</span>
+              </div>
+              <div className="space-y-4">
+                <div className="h-8 bg-primary rounded-lg w-full flex items-center px-4 text-xs text-on-primary font-mono justify-between">
+                  <span>Price: $10.00</span>
+                  <span>Demand: 50k</span>
+                </div>
+                <div className="h-8 bg-primary rounded-lg w-[85%] flex items-center px-4 text-xs text-on-primary font-mono justify-between opacity-90">
+                  <span>Price: $9.50</span>
+                  <span>Demand: 80k</span>
+                </div>
+                <div className="h-8 bg-tertiary rounded-lg w-[70%] flex items-center px-4 text-xs text-on-tertiary font-mono justify-between">
+                  <span>CLEARING: $8.75</span>
+                  <span>Supply Filled</span>
+                </div>
+                <div className="h-8 bg-surface-variant rounded-lg w-[50%] flex items-center px-4 text-xs text-on-surface-variant font-mono justify-between opacity-50">
+                  <span>Price: $8.00</span>
+                  <span>Out of Money</span>
+                </div>
+              </div>
+              <div className="mt-8 p-4 bg-[#1c1c1e] rounded-xl font-encrypted-data text-encrypted-data text-center text-[#00ff41]">
+                DECRYPTING FINAL OUTCOME...
               </div>
             </div>
           </div>

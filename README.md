@@ -31,13 +31,23 @@ This is a monorepo containing both the smart contracts and the frontend applicat
 
 ## 📖 How the Auction Works
 
-The auction runs in four distinct phases:
+### Phase 0 — Launching an Auction (Creators)
+Auction creators use the `AuctionFactory` to launch new token sales in a permissionless manner.
+1. **Approval:** The creator approves the factory to transfer the total supply of the token being sold.
+2. **Deployment:** The creator calls the factory with parameters (floor price, supply, start/end times).
+3. **Funding:** The factory deploys a new `DutchAuction` contract and automatically transfers the tokens into it, securing them until the auction concludes.
 
-### Phase 1 — Shield Stablecoins
-Participating requires confidential stablecoins. Users shield standard ERC-20 tokens (e.g., USDC) into an ERC-7984 confidential wrapper. While the act of shielding is public, subsequent transfers and balances are entirely encrypted.
+### Phase 1 — Shield Stablecoins (Bidders)
+Participating requires confidential stablecoins. This ensures that the assets used for bidding are completely private.
+1. **Shielding:** Users convert standard ERC-20 tokens (e.g., USDC) into an ERC-7984 confidential wrapper.
+2. **Confidentiality:** While the act of shielding is public, subsequent transfers, balances, and bid payments are entirely encrypted.
+*Note: You can mint test USDC directly from the project **Dashboard** to get started.*
 
-### Phase 2 — Bidding
-Users have a set window to place bids. Each bid includes a **public price** and a **private, encrypted quantity** (`euint64`). Bots cannot monitor the mempool or front-run bids because the underlying demand at any given price point is hidden.
+### Phase 2 — Creating a Bid
+Users have a set window to place bids without exposing their intent to other participants or MEV bots.
+1. **Encryption:** Using the Zama SDK, the desired bid quantity is encrypted locally on the user's device as a `euint64` ciphertext.
+2. **Submission:** The user submits a **public price** and the **private ciphertext**. The network verifies the user has sufficient confidential balance without revealing the bid amount.
+3. **MEV Protection:** Bots cannot front-run bids because the underlying demand at any given price point is hidden on-chain.
 
 ### Phase 3 — Clearing Price & Allocation
 Bids are filled from highest price to lowest using Fully Homomorphic Encryption. The lowest price at which demand exhausts the supply becomes the **clearing price**. 
