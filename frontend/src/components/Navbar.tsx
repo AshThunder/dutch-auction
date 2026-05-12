@@ -22,8 +22,11 @@ export function Navbar() {
   return (
     <nav className="bg-surface dark:bg-surface text-primary dark:text-primary-fixed-dim font-display-xl text-display-xl-mobile docked full-width top-0 sticky z-50 flat no shadows">
       <div className="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto bg-surface dark:bg-surface">
-        <Link to="/" className="font-display-xl text-[24px] md:text-headline-lg text-tertiary-container dark:text-tertiary-fixed-dim hover:opacity-80 transition-opacity font-bold tracking-tight">
-          DUTCH AUCTION
+        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity group">
+          <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-full border border-tertiary-container dark:border-tertiary-fixed-dim" />
+          <span className="font-display-xl text-[24px] md:text-headline-lg text-tertiary-container dark:text-tertiary-fixed-dim font-bold tracking-tight">
+            DUTCH AUCTION
+          </span>
         </Link>
         <div className="hidden md:flex gap-4 md:gap-6 items-center font-headline-lg text-[22px]">
           <Link className={getLinkClass('/')} to="/">Home</Link>
