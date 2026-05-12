@@ -170,6 +170,112 @@ export function Home() {
         </div>
       </section>
 
+      {/* The Clearing Price Logic Section */}
+      <section className="w-full py-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <h2 className="font-display-xl text-[48px] text-on-surface mb-6">The Clearing Price Logic</h2>
+          <p className="font-body-md text-body-md text-on-surface-variant text-xl leading-relaxed">
+            When the auction concludes, our privacy engine securely fills bids from highest to lowest. The final filled bid establishes the universal <strong>Clearing Price</strong>. Every successful bidder pays exactly this price, regardless of their initial offer. All calculations are executed securely via Fully Homomorphic Encryption (FHE).
+          </p>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+          {/* Data Viz: Waterfall Chart */}
+          <div className="lg:col-span-5 bg-white rounded-[28px] p-8 shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/20 relative flex flex-col">
+            <h3 className="font-headline-lg text-[20px] text-on-surface mb-6 font-bold">Supply Consumption</h3>
+            <div className="flex-grow flex flex-col relative h-[400px]">
+              {/* Y-Axis Labels (Price) */}
+              <div className="absolute left-0 top-0 bottom-0 w-16 flex flex-col justify-between text-label-mono text-on-surface-variant text-xs py-4 pr-4 border-r border-surface-variant/50">
+                <span>$1.50</span>
+                <span>$1.40</span>
+                <span className="text-tertiary font-bold relative -left-1 px-1 bg-tertiary-fixed rounded">$1.30</span>
+                <span>$1.20</span>
+                <span>$1.10</span>
+              </div>
+              {/* Chart Area */}
+              <div className="absolute left-16 right-0 top-0 bottom-0 py-4 px-4 flex items-end gap-2">
+                {/* Clearing Price Line */}
+                <div className="absolute left-0 right-0 top-1/2 h-0 border-t-2 border-dashed border-[#ffd500] z-10 flex items-center">
+                  <span className="absolute right-4 -top-6 text-label-mono text-[#765b00] font-bold bg-[#ffd500] px-2 py-1 rounded shadow-sm">CLEARING PRICE</span>
+                </div>
+                {/* Bars */}
+                <div className="w-full bg-secondary-container h-[90%] rounded-t-md opacity-80 border border-[#d0bcff]"></div>
+                <div className="w-full bg-secondary-container h-[75%] rounded-t-md opacity-80 border border-[#d0bcff]"></div>
+                <div className="w-full bg-secondary-container h-[65%] rounded-t-md opacity-80 border border-[#d0bcff]"></div>
+                <div className="w-full bg-secondary-container h-[55%] rounded-t-md opacity-80 border border-[#d0bcff]"></div>
+                <div className="w-full bg-[#ffd500] h-[50%] rounded-t-md opacity-90 border border-[#e7c365] relative z-20 shadow-[0_0_15px_rgba(255,213,0,0.4)]"></div>
+                <div className="w-full bg-error-container h-[40%] rounded-t-md opacity-60 border border-[#ffb4ab]"></div>
+                <div className="w-full bg-error-container h-[30%] rounded-t-md opacity-60 border border-[#ffb4ab]"></div>
+                <div className="w-full bg-error-container h-[15%] rounded-t-md opacity-60 border border-[#ffb4ab]"></div>
+              </div>
+              {/* X-Axis Label */}
+              <div className="absolute bottom-0 left-16 right-0 text-center text-label-mono text-on-surface-variant text-xs pt-4 border-t border-surface-variant/50">
+                CUMULATIVE SUPPLY →
+              </div>
+            </div>
+          </div>
+          {/* Outcome Cards */}
+          <div className="lg:col-span-7 flex flex-col gap-6 justify-center">
+            {/* Winning Bids */}
+            <div className="bg-secondary-container rounded-[24px] p-6 shadow-sm border border-[#d0bcff] flex gap-4 items-start">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-[#d0bcff]">
+                <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+              </div>
+              <div>
+                <h3 className="font-headline-lg text-[20px] text-on-surface mb-2 flex items-center gap-2">
+                  Winning Bids
+                  <span className="text-xs font-label-mono bg-white text-on-secondary-container px-2 py-1 rounded-md border border-[#d0bcff]">BID &gt; CLEARING</span>
+                </h3>
+                <ul className="font-body-md text-on-surface-variant list-disc list-inside space-y-1">
+                  <li>Full requested token allocation granted.</li>
+                  <li>You pay the <em>lower</em> clearing price, not your bid price.</li>
+                  <li>Overpayment difference is automatically refunded.</li>
+                </ul>
+              </div>
+            </div>
+            {/* Marginal Bids */}
+            <div className="bg-[#fff9d6] rounded-[24px] p-6 shadow-sm border border-[#ffd500] flex gap-4 items-start relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-2 bg-[#ffd500]"></div>
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-[#ffd500] ml-2">
+                <span className="material-symbols-outlined text-[#765b00]" style={{ fontVariationSettings: "'FILL' 1" }}>horizontal_rule</span>
+              </div>
+              <div>
+                <h3 className="font-headline-lg text-[20px] text-on-surface mb-2 flex items-center gap-2">
+                  Marginal Bids
+                  <span className="text-xs font-label-mono bg-[#ffd500] text-[#765b00] px-2 py-1 rounded-md shadow-sm">BID = CLEARING</span>
+                </h3>
+                <ul className="font-body-md text-on-surface-variant list-disc list-inside space-y-1">
+                  <li>Hits exactly on the clearing price line.</li>
+                  <li>Pro-rata allocation based on remaining supply.</li>
+                  <li>Unspent funds for unfilled portion are refunded.</li>
+                </ul>
+              </div>
+            </div>
+            {/* Out-of-the-Money */}
+            <div className="bg-error-container rounded-[24px] p-6 shadow-sm border border-[#ffb4ab] flex gap-4 items-start">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-[#ffb4ab]">
+                <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>cancel</span>
+              </div>
+              <div>
+                <h3 className="font-headline-lg text-[20px] text-on-surface mb-2 flex items-center gap-2">
+                  Out-of-the-Money
+                  <span className="text-xs font-label-mono bg-white text-error px-2 py-1 rounded-md border border-[#ffb4ab]">BID &lt; CLEARING</span>
+                </h3>
+                <ul className="font-body-md text-on-surface-variant list-disc list-inside space-y-1">
+                  <li>Bid was below the final market clearing price.</li>
+                  <li>Zero token allocation received.</li>
+                  <li>100% of initial bid funds are returned securely.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="text-center max-w-3xl mx-auto">
+          <div className="inline-block bg-surface-container text-on-surface px-8 py-5 rounded-2xl border border-outline-variant/30 font-body-md text-body-md text-lg italic shadow-sm">
+            "This mechanism prioritizes fair distribution and organic price discovery over maximizing total sale amount."
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof Section */}
       <section className="w-full py-16 border-t border-b border-surface-variant/50 bg-surface-container-lowest">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
