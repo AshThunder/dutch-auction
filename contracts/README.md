@@ -22,7 +22,7 @@ The project utilizes specific `FHE` primitives to ensure data integrity while ma
 
 ### Confidential State Machine
 - **Aggregation:** We use `FHE.add` to build a demand curve on-chain. Even the total number of bids or the total demand at a price is hidden in ciphertext.
-- **Sorting & Clearing:** The contract iterates through price points in descending order. Using `FHE.lte`, it determines if the cumulative demand has exhausted the fixed supply.
+- **Sorting & Clearing:** The contract iterates through price points in descending order. Using `FHE.ge`, it determines if the cumulative demand has exhausted the fixed supply.
 - **Multiplexing (FHE.select):** Settlement uses `FHE.select` to determine winners. If `bid_price >= clearing_price`, the contract calculates an allocation; otherwise, it marks the bid for a full refund.
 
 ### MEV & Front-running Resistance
