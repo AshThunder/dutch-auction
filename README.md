@@ -64,26 +64,26 @@ Once the Zama Coprocessor decrypts the final clearing price, users can securely 
 
 ### Prerequisites
 - Node.js (v18+)
-- `pnpm` (v10+)
-- MetaMask or an EVM-compatible wallet configured for the Zama fhEVM network.
+- `npm` (v9+)
+- MetaMask or an injected EVM-compatible wallet (e.g. Rabby).
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YourUsername/zama-auction.git
-   cd zama-auction
+   git clone https://github.com/AshThunder/dutch-auction.git
+   cd dutch-auction
    ```
 
 2. Install dependencies:
    ```bash
-   pnpm install
-   cd frontend && pnpm install
+   npm install
+   cd frontend && npm install
    ```
 
 3. Set up environment variables:
-   - Copy `.env.example` to `.env` in the root and fill in your private keys.
-   - Copy `frontend/.env.example` to `frontend/.env` and configure your RPC URLs and factory addresses.
+   - Create `.env` in the root with `PRIVATE_KEY` and `SEPOLIA_RPC_URL`.
+   - Create `frontend/.env` with `VITE_FACTORY_ADDRESS` set to the deployed factory contract address.
 
 ---
 

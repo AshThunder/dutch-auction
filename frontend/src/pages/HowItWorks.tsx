@@ -99,7 +99,7 @@ export function HowItWorks() {
             <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">
               <div className="absolute -top-4 -left-4 w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-display-xl text-xl shadow-lg">1</div>
               <h3 className="font-headline-lg text-xl mb-4 text-on-surface mt-4">Shield Assets</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant">Bidders must first shield their stablecoins into a confidential token (USDC). This ensures the bidding funds are private. You can mint test USDC directly from your <Link to="/dashboard" className="text-primary hover:underline">Dashboard</Link>.</p>
+              <p className="font-body-md text-body-md text-on-surface-variant">Bidders must first shield their stablecoins into a confidential token (<img src="/usdc.png" alt="USDC" className="w-4 h-4 inline-block align-text-bottom mx-0.5" /> USDC). This ensures the bidding funds are private. You can mint test <img src="/usdc.png" alt="USDC" className="w-4 h-4 inline-block align-text-bottom mx-0.5" /> USDC directly from your <Link to="/dashboard" className="text-primary hover:underline">Dashboard</Link>.</p>
             </div>
             {/* Bid Step 2 */}
             <div className="bg-surface-container-low p-8 rounded-[28px] border border-outline-variant/30 relative">

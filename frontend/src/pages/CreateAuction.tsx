@@ -368,7 +368,7 @@ export function CreateAuction() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
               <div className="flex flex-col gap-2">
-                <label className="font-label-mono text-label-mono text-on-surface-variant">FLOOR PRICE (USDC)</label>
+                <label className="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-1.5">FLOOR PRICE <img src="/usdc.png" alt="USDC" className="w-4 h-4 inline" /> (USDC)</label>
                 <input 
                   className="bg-surface-container-lowest border-2 border-on-surface rounded-full px-6 py-4 font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container w-full text-right font-mono text-2xl" 
                   placeholder="0.00" 
@@ -402,7 +402,7 @@ export function CreateAuction() {
                 <div className="flex items-center justify-between border border-[#e5d5e5] rounded-full px-6 py-4 bg-[#fbf7fb] w-full">
                   <div className="flex items-center gap-3">
                     <span className="material-symbols-outlined text-[20px] text-[#8e44ad]">verified_user</span>
-                    <span className="text-[#1c1c1e] font-body-md font-medium">Confidential USDC (cUSDC)</span>
+                    <span className="text-[#1c1c1e] font-body-md font-medium flex items-center gap-2"><img src="/usdc.png" alt="USDC" className="w-5 h-5" /> Confidential USDC (cUSDC)</span>
                   </div>
                   <span className="material-symbols-outlined text-[18px] text-on-surface-variant opacity-70">lock</span>
                 </div>
@@ -668,7 +668,7 @@ export function CreateAuction() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center border-b border-surface-variant pb-2">
                   <span className="font-label-mono text-label-mono text-on-surface-variant">FLOOR</span>
-                  <span className="font-encrypted-data text-encrypted-data">{floorPrice || '--'} USDC</span>
+                  <span className="font-encrypted-data text-encrypted-data flex items-center gap-1.5"><img src="/usdc.png" alt="USDC" className="w-4 h-4" /> {floorPrice || '--'} USDC</span>
                 </div>
                 <div className="flex justify-between items-center border-b border-surface-variant pb-2">
                   <span className="font-label-mono text-label-mono text-on-surface-variant">SUPPLY</span>
@@ -678,7 +678,7 @@ export function CreateAuction() {
                   <span className="font-label-mono text-label-mono text-on-surface-variant">PAYMENT</span>
                   <span className="font-body-md text-on-surface flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px] text-[#8e44ad]">verified_user</span>
-                    cUSDC
+                    <img src="/usdc.png" alt="USDC" className="w-4 h-4" /> cUSDC
                   </span>
                 </div>
                 <div className="flex justify-between items-center">

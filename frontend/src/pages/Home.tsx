@@ -54,7 +54,7 @@ export function Home() {
               <div className="space-y-4">
                 {/* Header */}
                 <div className="grid grid-cols-2 text-label-mono text-on-surface-variant pb-2 border-b border-surface-variant">
-                  <div>PRICE (USDC)</div>
+                  <div className="flex items-center gap-1.5"><img src="/usdc.png" alt="USDC" className="w-3 h-3" /> PRICE (USDC)</div>
                   <div className="text-right">QUANTITY</div>
                 </div>
                 {/* Rows */}

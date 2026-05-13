@@ -31,7 +31,6 @@ Because the demand curve is encrypted, searchers cannot see where the "buy wall"
 ## 🛠️ Development & Testing
 
 ### Compilation
-The contracts are configured for the **Paris** EVM version to maintain compatibility with current fhEVM precompiles.
 
 ```bash
 npx hardhat compile
@@ -40,18 +39,22 @@ npx hardhat compile
 ### Testing
 The Hardhat test suite (`/test`) validates:
 - **Strict Bounds:** Auctions cannot be created in the past or end before they start.
-- **Access Control:** Only the owner/coprocessor can trigger finalization.
-- **Structural Integrity:** Ensures correct handling of ERC-20 and ERC-7984 (confidential) token transfers.
+- **Access Control:** Only the owner can trigger finalization and claim creator revenue.
+- **Structural Integrity:** Ensures correct handling of ERC-20 token transfers into the auction escrow.
 
-*Note: For functional FHE testing, a Zama-enabled node or the `fhevmjs` mock environment is required.*
+> **Note:** FHE precompiles are not available in a standard Hardhat environment. Tests covering FHE-specific logic (`submitBid`, `calculateClearingPrice`, `requestClaim`) are structurally mocked and require a Zama-enabled node for full end-to-end validation.
 
 ## 🚀 Deployment
 
+The deploy script (`scripts/deploy.ts`) deploys the `AuctionFactory` contract. Individual `DutchAuction` contracts are deployed permissionlessly by users through the factory.
+
 ```bash
-npx hardhat run scripts/deploy.ts --network zama
+npx hardhat run scripts/deploy.ts --network sepolia
 ```
+
+After deployment, copy the printed `AuctionFactory` address into `frontend/.env` as `VITE_FACTORY_ADDRESS`.
 
 ### Environment Variables
 Required in the root `.env`:
-- `PRIVATE_KEY`: Your deployment account.
-- `SEPOLIA_RPC_URL`: RPC endpoint for the Zama fhEVM network.
+- `PRIVATE_KEY`: Your deployer wallet private key.
+- `SEPOLIA_RPC_URL`: RPC endpoint for the Sepolia testnet (e.g. from Alchemy or Infura).

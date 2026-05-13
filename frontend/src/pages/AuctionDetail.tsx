@@ -58,7 +58,7 @@ function BalanceCard({
       <div className="flex items-center gap-3">
         {isRevealed ? (
           balance !== null ? (
-            <span className="font-body-md font-bold">{Number(balance).toLocaleString(undefined, { maximumFractionDigits: 2 })} cUSDC</span>
+            <span className="font-body-md font-bold flex items-center gap-1.5"><img src="/usdc.png" alt="USDC" className="w-4 h-4" /> {Number(balance).toLocaleString(undefined, { maximumFractionDigits: 2 })} cUSDC</span>
           ) : (
             <span className="flex items-center gap-1 text-[12px]"><Loader2 size={12} className="animate-spin" /> Decrypting…</span>
           )
@@ -733,7 +733,7 @@ export function AuctionDetail() {
         </h1>
         <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
           <div className="font-display-xl-mobile md:font-display-xl text-[48px] md:text-display-xl text-on-surface font-extrabold tracking-tighter opacity-50">
-            $?.?? <span className="font-headline-lg text-headline-lg text-outline font-normal ml-2">USDC</span>
+            $?.?? <span className="font-headline-lg text-headline-lg text-outline font-normal ml-2 flex items-center gap-2"><img src="/usdc.png" alt="USDC" className="w-6 h-6 inline-block" /> USDC</span>
           </div>
           <div className="mb-3">
             <span className="inline-flex items-center gap-2 bg-[#111111] text-[#00FF41] font-encrypted-data text-[12px] md:text-encrypted-data px-3 py-1 rounded-[4px]">
@@ -808,7 +808,7 @@ export function AuctionDetail() {
         <h1 className="font-headline-lg text-[32px] md:text-headline-lg text-on-surface-variant mb-4">Phase 3: Clearing Price Revealed</h1>
         <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
           <div className="font-display-xl-mobile md:font-display-xl text-[48px] md:text-display-xl text-on-surface font-extrabold tracking-tighter">
-            ${clearingPriceFormatted || '0.00'} <span className="font-headline-lg text-headline-lg text-outline font-normal ml-2">USDC</span>
+            ${clearingPriceFormatted || '0.00'} <span className="font-headline-lg text-headline-lg text-outline font-normal ml-2 flex items-center gap-2"><img src="/usdc.png" alt="USDC" className="w-6 h-6 inline-block" /> USDC</span>
           </div>
           <div className="mb-3">
             <span className="inline-flex items-center gap-2 bg-[#111111] text-[#00FF41] font-encrypted-data text-[12px] md:text-encrypted-data px-3 py-1 rounded-[4px]">
@@ -880,7 +880,7 @@ export function AuctionDetail() {
               </span>
               <h3 className="font-headline-lg text-[24px] md:text-[28px] text-on-surface mb-2">Auction Complete</h3>
               <p className="font-body-md text-[16px] text-on-surface-variant max-w-md">
-                This auction has concluded with a clearing price of <strong>${clearingPriceFormatted}</strong> USDC. You did not place a bid in this auction.
+                This auction has concluded with a clearing price of <strong>${clearingPriceFormatted}</strong> <img src="/usdc.png" alt="USDC" className="w-4 h-4 inline-block -mt-0.5" /> USDC. You did not place a bid in this auction.
               </p>
             </div>
           )}
