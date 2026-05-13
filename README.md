@@ -1,4 +1,4 @@
-# Zama FHE Confidential Dutch Auction
+# Confidential Dutch Auction
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![FHEVM](https://img.shields.io/badge/Zama-fhEVM-8A2BE2)
